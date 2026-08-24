@@ -2,6 +2,8 @@
 
 Claude Code custom slash commands for keeping an internship/learning journal in Notion up to date without copy-pasting the same prompts every time.
 
+**Why this exists:** the source template is designed around a Notion AI Agent, which requires a paid Notion plan. If you don't have Notion premium, these commands get you the same workflow — summarizing a coding session and filing it into your Daily Logs / Concepts Tracker databases — using Claude Code's [Notion MCP integration](https://developers.notion.com/guides/mcp/get-started-with-mcp) instead, which only needs a free Notion account.
+
 ## Commands
 
 - `/link-journal <notion journal page url>` — run once per device. Resolves your journal's Daily Logs and Concepts Tracker databases and saves them to `~/.claude/notion-journal-config.json`. Re-run any time to point at a different journal.
