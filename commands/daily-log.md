@@ -1,18 +1,21 @@
 ---
-description: Create a Daily Log entry in the HTX AI/ML Lab Intern Journal (Notion) from a session summary JSON
+description: Create today's entry in your linked Notion journal's Daily Logs database, from a session summary JSON
 ---
 
-Create a new entry in the **Daily Logs** database of the HTX AI/ML Lab Intern Journal in Notion.
+Read `~/.claude/notion-journal-config.json` first — it records which Notion database is my "Daily Logs" database and its exact property names. If the file doesn't exist, stop and tell me to run `/link-journal <notion journal page url>` first; don't guess at IDs or property names.
 
-- Data source ID: `d8abb1b8-ca5e-8302-b7de-879f750298dd`
-- Journal page: https://app.notion.com/p/674bb1b8ca5e82a4abd80128b6256fbd
+Create a new entry in the **Daily Logs** database.
 
-Steps:
-1. If a date isn't clearly given below, ask me for it before creating anything — don't guess.
-2. Set the **Date** title property to the given date in "Mon D, YYYY" style (e.g. "Aug 24, 2026").
-3. Also set the **Log Date** property (a real Date-type property used for sorting the view) to the matching ISO date (YYYY-MM-DD).
-4. Map the JSON below 1:1 onto these text properties: "What I Built Today", "Key Learnings", "Mistakes & Lessons", "Next Steps", "Questions to Answer". If a JSON value is an array, join it into readable prose rather than leaving raw JSON syntax in the property.
-5. Confirm the new page URL back to me when done.
+Set the **Date** title to: the date given below (ask me first if it isn't clearly given — don't guess). If the schema also has a separate sortable date-type property (e.g. "Log Date"), set that too to the matching ISO date so views stay sortable.
 
-Date and/or JSON:
+Then set the properties using the JSON below. Each JSON key maps 1:1 to a property in the Daily Logs database (match by name, or closest equivalent recorded in the config):
+- What I Built Today
+- Key Learnings
+- Mistakes & Lessons
+- Next Steps
+- Questions to Answer
+
+If a JSON value is an array, join it into readable prose rather than leaving raw JSON syntax in the property. If a JSON key has no clear matching property in the config, tell me instead of inventing one. Confirm the new page URL back to me when done.
+
+Date and JSON:
 $ARGUMENTS
