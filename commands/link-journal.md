@@ -13,13 +13,21 @@ Steps:
    - `data_source_id`
    - the title property name
    - every other property name and its type
-4. Write this to `~/.claude/notion-journal-config.json` (create the `.claude` folder if it doesn't exist). Overwrite the file if one already exists — re-linking replaces the old link. Shape:
+4. For the Daily Logs database specifically, entries must behave like a stack (most recent on top):
+   - Look for an existing date-type property meant for sorting (e.g. "Log Date", "Date" if it's a real date type rather than the title). If one exists, note its name.
+   - If none exists, add one (`ADD COLUMN "Log Date" DATE`) and backfill it on every existing row by best-effort parsing the row's title into an ISO date — the title field is often free text (e.g. "August 3, 2026 (IMC)") and not reliably sortable as text, so don't skip this.
+   - Find the database's primary table view and set its sort to that date property, descending, so newest entries always render on top without manual reordering.
+   - Record the `view_id` and the sort property name (as `sort_property`) for Daily Logs.
+5. Write this to `~/.claude/notion-journal-config.json` (create the `.claude` folder if it doesn't exist). Overwrite the file if one already exists — re-linking replaces the old link. Shape:
    ```json
    {
      "journal_page_url": "<the page URL I gave you>",
      "daily_log": {
        "data_source_id": "...",
        "title_property": "...",
+       "title_date_format": "MMMM D, YYYY",
+       "sort_property": "...",
+       "view_id": "view://...",
        "properties": { "PropertyName": "type", "...": "..." }
      },
      "concepts_tracker": {
@@ -29,6 +37,6 @@ Steps:
      }
    }
    ```
-5. Confirm back to me what got linked — database names plus their property lists — so I can catch a wrong match before it's used for real writes.
+6. Confirm back to me what got linked — database names, property lists, and the sort property used for the stack ordering — so I can catch a wrong match before it's used for real writes.
 
 This link is permanent on this device: `/daily-log` and `/extract-concepts` read this file automatically from now on. Re-run `/link-journal <url>` any time to point at a different journal.
